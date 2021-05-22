@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voitures{% endblock %}
+{% block monTitre %}Liste des voitures{% endblock %}
+{% block body %}
+{{form_start(form)}}
+    <div class="row no-gutter align-items-center text-center">
+        <div class="col">
+            {{form_row(form.minAnnee)}}
+        </div>
+        <div class="col">
+            {{form_row(form.maxAnnee)}}
+        </div>
+        <div class="col-2">
+            <input type="submit" value="Rechercher" class="btn btn-primary"> 
+        </div>
+    </div>
+{{form_end(form)}}
+
+<div class="row no-gutters">
+    {% for voiture in voitures %}
+        <div class="col-12 col-lg-6 p-1">
+
+            <div class="card shadow">
+                <div class="row p-1 align-items-center">
+                    <div class="col-12 col-md-4">
+                        <img class="card-img text-center" src="{{ asset('images/' ~ voiture.modele.image)}}">
+                    </div>
+                    <div class="col">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ voiture.immatriculation }}</h4>
+                            <p class="card-text">
+                                <div>Marque : {{ voiture.modele.marque.libelle}} </div>
+                                <div>Modele : {{ voiture.modele.libelle}} - PM : {{voiture.modele.prixMoyen}}€  </div>
+                                <div>Nombre de porte : {{voiture.nbPortes}} </div>
+                                <div>Année : {{ voiture.annee}} </div>
+                             </p>
+                        </div>
+                    </div>
+                </div>           
+            </div>
+
+        </div>        
+    {% endfor %}
+</div>
+<div class="navigation shadow-lg d-flex justify-content-center rounded mt-2">
+    {{ knp_pagination_render(voitures) }}
+</div>
+
+{% endblock %}
