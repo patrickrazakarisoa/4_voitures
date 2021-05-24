@@ -3,9 +3,12 @@
 {% block title %}Acceuil{% endblock %}
 {% block monTitre %}Concession PSRAZ Automobile{% endblock %}
 {% block body %}
-<p>Bienvenu sur le site de la concession automobile PSRAZ</p>
-<p>Le site vous permet de louer des voitures avec un abonnement mensuel.</p>
+<p class="container-fluid text-center">Bienvenu sur le site de la concession automobile PSRAZ</p>
+<p class="container-fluid text-center">Le site vous permet de louer des voitures avec un abonnement mensuel.</p>
+<div class="container-fluid w-50 d-flex justify-content-center">
+     <img src="{{asset('images/modele1.jpg')}}" class="card-img">
+</div>
 
-<h2 class="border rounded bg-danger text-center text-bold text-white p-3 mt-3 shadow">Pour accéder à la liste des véhicules, vous devez vous connectez</h2>
+<h2 class="border rounded bg-danger text-center text-bold text-white p-3 mt-3 shadow">Pour accéder à la liste des véhicules, vous devez vous connecter.</h2>
 
 {% endblock %}

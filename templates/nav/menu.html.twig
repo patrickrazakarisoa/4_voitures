@@ -9,12 +9,26 @@
                <li class="nav-item">
                     <a class="nav-link" href="{{ path('voitures')}} ">Voitures</a>
                </li>
+               {% if is_granted('ROLE_ADMIN') %}
                <li class="nav-item">
                     <a class="nav-link" href="{{path('admin')}} ">Admin</a>
                </li>
-               {# <li class="nav-item">
-                    <a class="nav-link" href="#">Marques</a>
-               </li>   #}
+               {% endif %}            
+               {% if app.user %} 
+               <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_logout')}} ">Se déconnecter</a>
+               </li>  
+               <li class="nav-item">
+                   <div class="nav-link">Bonjour {{ app.user.username|capitalize }} !</div>
+               </li>
+               {% else %}
+               <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_login')}} ">Se connecter</a>
+               </li>  
+               <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_register')}} ">S'inscrire</a>
+               </li>                     
+               {% endif %}
           </ul> 
     </div>
   </div>
