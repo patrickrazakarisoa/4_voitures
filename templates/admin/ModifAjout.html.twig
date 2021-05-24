@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block monTitre %}
+{% if isModification %}
+     Modification de la voiture : {{ voiture.modele.libelle}}, immatriculée {{voiture.immatriculation}}
+{% else %}
+     Ajout d'une nouvelle voiture
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div>
+{{form_start(form)}}
+{{form_row(form.immatriculation, { 'label': 'Plaque d\'immmatriculation' })}}
+{{form_row(form.nbPortes, { 'label': 'Nombre de porte' })}}
+{{form_row(form.annee, { 'label': 'Ancienneté' })}}
+{{form_row(form.modele,{ 'label': 'Modele de la voiture' } )}}
+{{form_end(form)}}
+</div>
+{% endblock %}

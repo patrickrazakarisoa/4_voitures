@@ -3,7 +3,13 @@
 {% block title %}Voitures{% endblock %}
 {% block monTitre %}Liste des voitures{% endblock %}
 {% block body %}
-{{form_start(form)}}
+{% if admin %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success text-center">
+            {{ message }} 
+        </div>   
+    {% endfor %}{{form_start(form)}}
+{% endif %}
     <div class="row no-gutter align-items-center text-center">
         <div class="col">
             {{form_row(form.minAnnee)}}
@@ -11,11 +17,19 @@
         <div class="col">
             {{form_row(form.maxAnnee)}}
         </div>
-        <div class="col-2">
+        <div class="col">
             <input type="submit" value="Rechercher" class="btn btn-primary"> 
         </div>
     </div>
 {{form_end(form)}}
+{% if admin %}
+<div class="d-flex justify-content-center m-1">
+    <div class="col-12 col-lg-6 p-1 shadow rounded row  bg-dark ">
+        <a href="{{path('admin_creation')}}" class="col m-1 btn btn-success text-dark w-2">Ajouter</a>
+    </div> 
+</div>
+
+{% endif %}
 
 <div class="row no-gutters">
     {% for voiture in voitures %}
@@ -36,14 +50,28 @@
                                 <div>Année : {{ voiture.annee}} </div>
                              </p>
                         </div>
+                    
                     </div>
-                </div>           
+                 
+                </div> 
+                {% if admin %}
+                <div class="border shadow rounded row m-1 bg-dark d-flex align-items-center">
+                    <a href="{{path('admin_modifier', {'id': voiture.id})}}" class="col m-1 container-fluid btn btn-warning text-dark text-center">Modifier</a>
+                    <form class="col container-fluid" method="post" action="{{ path("admin_suppression",{'id': voiture.id} )}}" onsubmit="return confirm('Confirmer la suppression.');">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ voiture.id) }}">
+                        <input type="submit" class="container-fluid btn btn-danger text-dark" value="supprimer">
+                    </form>
+                </div>            
+                {% endif %} 
+                      
             </div>
+          
 
         </div>        
     {% endfor %}
 </div>
-<div class="navigation shadow-lg d-flex justify-content-center rounded mt-2">
+<div class="navigation d-flex justify-content-center m-2 p-2">
     {{ knp_pagination_render(voitures) }}
 </div>
 

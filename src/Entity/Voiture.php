@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
@@ -19,16 +20,40 @@ class Voiture
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "le champ ne peut être nul")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=true,
+     *     message="Ce champ doit contenir un nombre entier"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 7,
+     *      minMessage = "Ce champ doit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Ce champ doit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $immatriculation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 2,
+     *      max = 5,
+     *      notInRangeMessage = "Vous devez choisir entre {{ min }} et {{ max }}.",
+     * )   
+     * @Assert\NotBlank(message = "le champ ne peut être nul")
      */
     private $nbPortes;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1990,
+     *      max = 2020,
+     *      notInRangeMessage = "Vous devez mettre un nombre d'année entre {{ min }} et {{ max }}.",
+     * )
+     * @Assert\NotBlank(message = "le champ ne peut être nul")
      */
     private $annee;
 

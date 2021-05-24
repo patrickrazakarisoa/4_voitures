@@ -26,12 +26,14 @@ class VoitureController extends AbstractController
         $voitures = $paginatorInterface->paginate(
             $voitureRepository->findAllWhitPagination($rechercheVoiture), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            4 /*limit per page*/
+            12 /*limit per page*/
         );
 
         return $this->render('voiture/voitures.html.twig', [
             "voitures" => $voitures,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "admin" => false
+
         ]);
     }
 }
