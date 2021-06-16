@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerer mon compte{% endblock %}
+
+{% block body %}
+{{ form_start(form, { 'attr': { 'class': 'card m-auto mt-3 p-3', 'style': 'width:30%'}}) }}
+{# {{ form_label(registrationForm.username, 'Your name', { 'attr': { 'style': 'color:black'}}) }} #}
+{{ form_row(form.username)}}
+{{ form_row(form.email, {
+    label: 'Adresse email'
+}) }}
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+{% block monTitre %}Gestion de l'utilisateur {{app.user.username|capitalize}} {% endblock %}
+
+{% block body %}
+
+<div class="card p-2 m-3">
+    <table class="table container m-4">
+        <tbody>
+            {# <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr> #}
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            {# <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr> #}
+            {# <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr> #}
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container-fluid row d-flex align-items-center justify-content-around">
+        <a href="{{ path('user_edit', {'id': user.id}) }}" class="col-2 shadow-lg  btn btn-warning">Modifier</a>
+        <div class="col-2 shadow-lg  btn btn-danger">
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+ 
+
+{% endblock %}
